@@ -18,12 +18,14 @@ export function GenerarRecursoForm({
   const [tipo, setTipo] = useState<TipoRecurso>("PLANEACION");
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [ultimoRecursoId, setUltimoRecursoId] = useState<string | null>(null);
+  const [ultimoRecurso, setUltimoRecurso] = useState<{ id: string; tipo: TipoRecurso } | null>(
+    null
+  );
 
   async function generar() {
     setCargando(true);
     setError(null);
-    setUltimoRecursoId(null);
+    setUltimoRecurso(null);
     try {
       const res = await fetch("/api/recursos/generar", {
         method: "POST",
@@ -34,7 +36,7 @@ export function GenerarRecursoForm({
       if (!res.ok) {
         throw new Error(data.error ?? "No se pudo generar el recurso.");
       }
-      setUltimoRecursoId(data.recurso.id as string);
+      setUltimoRecurso({ id: data.recurso.id as string, tipo });
       router.refresh();
     } catch (e) {
       setError(e instanceof Error ? e.message : "Error desconocido.");
@@ -65,14 +67,18 @@ export function GenerarRecursoForm({
         {cargando ? "Generando…" : "Generar recurso"}
       </button>
       {error && <span className="text-sm text-red-600 dark:text-red-400">{error}</span>}
-      {ultimoRecursoId && !error && (
+      {ultimoRecurso && !error && (
         <a
-          href={`/api/recursos/${ultimoRecursoId}`}
+          href={`/api/recursos/${ultimoRecurso.id}`}
           className="text-sm font-medium text-emerald-700 hover:underline dark:text-emerald-400"
         >
-          Descargar el recurso generado →
+          Descargar "{ETIQUETA_TIPO[ultimoRecurso.tipo]}" generado →
         </a>
       )}
+      <p className="w-full text-xs text-zinc-500 dark:text-zinc-400">
+        Recuerde: el selector conserva el tipo elegido. Para generar otro tipo, cámbielo
+        antes de dar clic en "Generar recurso".
+      </p>
     </div>
   );
 }
