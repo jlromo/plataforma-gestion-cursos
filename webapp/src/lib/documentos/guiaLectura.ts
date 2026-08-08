@@ -5,7 +5,7 @@ import { crearDocumento, empaquetar, parrafo, titulo1, titulo2, vinetaItem } fro
 export async function buildGuiaLecturaDocx(data: GuiaLectura): Promise<Buffer> {
   const hijos: Paragraph[] = [titulo1(data.titulo), parrafo(data.introduccion), titulo2("Conceptos clave")];
 
-  for (const c of data.conceptosClave) {
+  for (const c of data.conceptosClave ?? []) {
     hijos.push(
       new Paragraph({
         children: [
@@ -17,7 +17,7 @@ export async function buildGuiaLecturaDocx(data: GuiaLectura): Promise<Buffer> {
     );
   }
 
-  hijos.push(titulo2("Preguntas guía"), ...data.preguntasGuia.map(vinetaItem));
+  hijos.push(titulo2("Preguntas guía"), ...(data.preguntasGuia ?? []).map(vinetaItem));
   hijos.push(titulo2("Resumen"), parrafo(data.resumen));
 
   return empaquetar(crearDocumento(hijos));

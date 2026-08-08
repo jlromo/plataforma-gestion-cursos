@@ -22,6 +22,7 @@ export async function generarContenido<T extends TipoRecurso>(
         name: config.toolName,
         description: config.toolDescription,
         input_schema: config.inputSchema as Anthropic.Tool.InputSchema,
+        strict: true,
       },
     ],
     tool_choice: { type: "tool", name: config.toolName },

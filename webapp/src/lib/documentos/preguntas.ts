@@ -6,11 +6,11 @@ export async function buildPreguntasDocx(data: PreguntasDidacticas): Promise<Buf
   const hijos: Paragraph[] = [
     titulo1(data.titulo),
     titulo2("Preguntas detonadoras"),
-    ...data.preguntasDetonadoras.map(vinetaItem),
+    ...(data.preguntasDetonadoras ?? []).map(vinetaItem),
     titulo2("Preguntas de desarrollo"),
-    ...data.preguntasDesarrollo.map(vinetaItem),
+    ...(data.preguntasDesarrollo ?? []).map(vinetaItem),
     titulo2("Preguntas de cierre"),
-    ...data.preguntasCierre.map(vinetaItem),
+    ...(data.preguntasCierre ?? []).map(vinetaItem),
   ];
 
   return empaquetar(crearDocumento(hijos));

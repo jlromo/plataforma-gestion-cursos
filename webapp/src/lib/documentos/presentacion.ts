@@ -16,7 +16,7 @@ export async function buildPresentacionPptx(data: Presentacion): Promise<Buffer>
     align: "center",
   });
 
-  for (const slide of data.slides) {
+  for (const slide of data.slides ?? []) {
     const s = pres.addSlide();
     s.addText(slide.titulo, {
       x: 0.5,
@@ -27,7 +27,7 @@ export async function buildPresentacionPptx(data: Presentacion): Promise<Buffer>
       bold: true,
     });
     s.addText(
-      slide.vinetas.map((v) => ({ text: v, options: { bullet: true, breakLine: true } })),
+      (slide.vinetas ?? []).map((v) => ({ text: v, options: { bullet: true, breakLine: true } })),
       { x: 0.5, y: 1.3, w: 9, h: 5.5, fontSize: 18 }
     );
     if (slide.notas) {

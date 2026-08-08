@@ -5,7 +5,7 @@ import { crearDocumento, empaquetar, parrafo, titulo1, titulo2 } from "./comunDo
 export async function buildExamenDocx(data: Examen): Promise<Buffer> {
   const hijos: Paragraph[] = [titulo1(data.titulo), parrafo(data.instrucciones), titulo2("Preguntas")];
 
-  for (const p of data.preguntas) {
+  for (const p of data.preguntas ?? []) {
     hijos.push(
       new Paragraph({
         children: [
@@ -29,7 +29,7 @@ export async function buildExamenDocx(data: Examen): Promise<Buffer> {
     }
   }
 
-  const conRespuesta = data.preguntas.filter((p) => p.respuestaSugerida);
+  const conRespuesta = (data.preguntas ?? []).filter((p) => p.respuestaSugerida);
   if (conRespuesta.length > 0) {
     hijos.push(titulo2("Clave de respuestas (uso del profesor)"));
     for (const p of conRespuesta) {

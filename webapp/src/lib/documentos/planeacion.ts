@@ -9,11 +9,11 @@ export async function buildPlaneacionDocx(data: Planeacion): Promise<Buffer> {
     titulo2("Objetivo de aprendizaje"),
     parrafo(data.objetivoAprendizaje),
     titulo2("Materiales"),
-    ...data.materiales.map(vinetaItem),
+    ...(data.materiales ?? []).map(vinetaItem),
     titulo2("Desarrollo de la sesión"),
   ];
 
-  for (const fase of data.desarrollo) {
+  for (const fase of data.desarrollo ?? []) {
     hijos.push(
       new Paragraph({
         children: [

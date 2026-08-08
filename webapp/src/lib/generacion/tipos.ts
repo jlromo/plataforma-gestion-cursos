@@ -5,12 +5,12 @@ export type Planeacion = {
   materiales: string[];
   desarrollo: { fase: string; minutos: number; descripcion: string }[];
   evaluacion: string;
-  tareaExtraclase?: string;
+  tareaExtraclase: string | null;
 };
 
 export type Presentacion = {
   titulo: string;
-  slides: { titulo: string; vinetas: string[]; notas?: string }[];
+  slides: { titulo: string; vinetas: string[]; notas: string | null }[];
 };
 
 export type GuiaLectura = {
@@ -28,8 +28,8 @@ export type Examen = {
     numero: number;
     tipo: string;
     enunciado: string;
-    opciones?: string[];
-    respuestaSugerida?: string;
+    opciones: string[] | null;
+    respuestaSugerida: string | null;
     puntos: number;
   }[];
 };
