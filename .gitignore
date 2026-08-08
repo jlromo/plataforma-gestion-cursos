@@ -5,3 +5,7 @@
 
 # Archivos temporales de Word
 ~$*
+
+# Nunca versionar credenciales sueltas en la raíz del proyecto
+ANTHROPIC_API_KEY*
+*API_KEY*.docx

@@ -21,7 +21,9 @@
       "Skill(claude-api:*)",
       "Bash(node -e \"console.log\\(require\\('./node_modules/docx/package.json'\\).version\\)\")",
       "Bash(node -e \"console.log\\(require\\('./node_modules/pptxgenjs/package.json'\\).version\\)\")",
-      "Bash(mkdir -p \"/c/Archivos 2026/2026 Plataforma de Gestión de Cursos/webapp/src/app/api/recursos/[id]\")"
+      "Bash(mkdir -p \"/c/Archivos 2026/2026 Plataforma de Gestión de Cursos/webapp/src/app/api/recursos/[id]\")",
+      "Bash(SKILL_DIR=\"C:/Users/jlrom/AppData/Roaming/Claude/local-agent-mode-sessions/skills-plugin/864926ab-2070-4382-9fc3-ee39e1b8c099/d6995691-3926-4892-96c2-ab578e6c0327/skills/docx\" *)",
+      "Bash(/c/Python314/python -c \"import docx; print\\('ok'\\)\")"
     ]
   }
 }
