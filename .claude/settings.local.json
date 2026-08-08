@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "Bash(npx --yes create-next-app@latest . --ts --app --eslint --tailwind --src-dir --import-alias \"@/*\" --use-npm --no-git)",
+      "Bash(npx --yes create-next-app@latest webapp --ts --app --eslint --tailwind --src-dir --import-alias \"@/*\" --use-npm --no-git)",
+      "Bash(npm install *)",
+      "Bash(npx prisma *)",
+      "Bash(npx tsx *)",
+      "Bash(/c/Python314/python -c \"import pypdf; print\\('pypdf ok'\\)\")",
+      "Bash(/c/Python314/python -c \"import pdfplumber; print\\('pdfplumber ok'\\)\")",
+      "Bash(/c/Python314/python -c ' *)",
+      "Read(//c/Users/jlrom/AppData/Local/Temp/claude/C--Archivos-2026-2026-Plataforma-de-Gesti-n-de-Cursos/9b11d0f6-67d4-4a09-adac-70697a929519/scratchpad/**)",
+      "Bash(/c/Python314/python -c \" *)",
+      "Bash(mkdir -p \"/c/Archivos 2026/2026 Plataforma de Gestión de Cursos/webapp/src/app/cursos/[slug]/unidades/[unidadId]/sesiones/[sesionId]\")",
+      "Bash(node -e \"console.log\\(!!process.env.ANTHROPIC_API_KEY\\)\")",
+      "Bash(npm audit *)",
+      "Bash(mkdir -p \"/c/Archivos 2026/2026 Plataforma de Gestión de Cursos/webapp/src/lib/generacion\" \"/c/Archivos 2026/2026 Plataforma de Gestión de Cursos/webapp/src/app/api/recursos/generar\" \"/c/Archivos 2026/2026 Plataforma de Gestión de Cursos/webapp/src/app/api/recursos/[id]\")",
+      "Bash(node -e \"console.log\\(require\\('./node_modules/@anthropic-ai/sdk/package.json'\\).version\\)\")",
+      "Skill(claude-api)",
+      "Skill(claude-api:*)",
+      "Bash(node -e \"console.log\\(require\\('./node_modules/docx/package.json'\\).version\\)\")",
+      "Bash(node -e \"console.log\\(require\\('./node_modules/pptxgenjs/package.json'\\).version\\)\")",
+      "Bash(mkdir -p \"/c/Archivos 2026/2026 Plataforma de Gestión de Cursos/webapp/src/app/api/recursos/[id]\")"
+    ]
+  }
+}

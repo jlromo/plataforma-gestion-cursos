@@ -1,0 +1,107 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum EstadoContenido {
+  PENDIENTE
+  EN_PROCESO
+  LISTO
+}
+
+enum TipoMaterial {
+  PROGRAMA
+  BIBLIOGRAFIA
+}
+
+enum TipoRecurso {
+  PLANEACION
+  PRESENTACION
+  GUIA_LECTURA
+  EXAMEN
+  PREGUNTAS_DIDACTICAS
+}
+
+model Curso {
+  id          String          @id @default(cuid())
+  slug        String          @unique
+  nombre      String
+  carpeta     String
+  estado      EstadoContenido @default(PENDIENTE)
+  orden       Int             @default(0)
+  unidades    Unidad[]
+  materiales  Material[]
+  recursos    RecursoGenerado[]
+  creadoEn    DateTime        @default(now())
+  actualizadoEn DateTime      @updatedAt
+}
+
+model Unidad {
+  id          String   @id @default(cuid())
+  curso       Curso    @relation(fields: [cursoId], references: [id], onDelete: Cascade)
+  cursoId     String
+  titulo      String
+  orden       Int      @default(0)
+  objetivo    String?
+  sesiones    Sesion[]
+  referencias Referencia[]
+  recursos    RecursoGenerado[]
+  creadoEn    DateTime @default(now())
+}
+
+model Sesion {
+  id        String   @id @default(cuid())
+  unidad    Unidad   @relation(fields: [unidadId], references: [id], onDelete: Cascade)
+  unidadId  String
+  titulo    String
+  orden     Int      @default(0)
+  fecha     DateTime?
+  objetivo  String?
+  recursos  RecursoGenerado[]
+  creadoEn  DateTime @default(now())
+}
+
+model Referencia {
+  id        String   @id @default(cuid())
+  unidad    Unidad   @relation(fields: [unidadId], references: [id], onDelete: Cascade)
+  unidadId  String
+  titulo    String
+  archivo   String
+  creadoEn  DateTime @default(now())
+}
+
+// Archivos fuente ya organizados por el usuario (programas y bibliografía),
+// indexados por referencia de ruta en vez de duplicarse dentro del proyecto.
+model Material {
+  id        String       @id @default(cuid())
+  curso     Curso        @relation(fields: [cursoId], references: [id], onDelete: Cascade)
+  cursoId   String
+  tipo      TipoMaterial
+  nombre    String
+  rutaAbsoluta String
+  tamanioBytes Int?
+  detectadoEn DateTime   @default(now())
+}
+
+model RecursoGenerado {
+  id         String      @id @default(cuid())
+  tipo       TipoRecurso
+  curso      Curso       @relation(fields: [cursoId], references: [id], onDelete: Cascade)
+  cursoId    String
+  unidad     Unidad?     @relation(fields: [unidadId], references: [id], onDelete: SetNull)
+  unidadId   String?
+  sesion     Sesion?     @relation(fields: [sesionId], references: [id], onDelete: SetNull)
+  sesionId   String?
+  titulo     String
+  archivo    String
+  creadoEn   DateTime    @default(now())
+}
