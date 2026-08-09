@@ -9,3 +9,7 @@
 # Nunca versionar credenciales sueltas en la raíz del proyecto
 ANTHROPIC_API_KEY*
 *API_KEY*.docx
+*suario*.docx
+*ontrase*.docx
+*credencial*.docx
+*Credencial*.docx
