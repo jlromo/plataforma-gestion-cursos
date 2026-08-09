@@ -15,8 +15,10 @@ export default async function Home() {
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-10">
-      <h1 className="text-2xl font-semibold tracking-tight">Mis cursos</h1>
-      <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+      <h1 className="text-2xl font-semibold tracking-tight text-chapingo-blue-900 dark:text-white">
+        Mis cursos
+      </h1>
+      <p className="mt-1 text-sm text-chapingo-silver-600 dark:text-chapingo-silver-400">
         Navegue un curso para ver su temario, bibliografía y recursos generados.
       </p>
 
@@ -29,37 +31,40 @@ export default async function Home() {
             <Link
               key={curso.id}
               href={`/cursos/${curso.slug}`}
-              className="group flex flex-col rounded-xl border border-black/[.08] bg-white p-5 shadow-sm transition hover:border-black/[.16] hover:shadow-md dark:border-white/[.145] dark:bg-zinc-950 dark:hover:border-white/[.25]"
+              className="group flex flex-col overflow-hidden rounded-xl border border-chapingo-silver-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-chapingo-blue-500 hover:shadow-lg hover:shadow-chapingo-blue-900/10 dark:border-chapingo-silver-200 dark:bg-chapingo-silver-50"
             >
-              <div className="flex items-start justify-between gap-2">
-                <h2 className="text-base font-semibold leading-snug">
-                  {curso.nombre}
-                </h2>
-                <EstadoBadge estado={curso.estado} />
+              <div className="h-1.5 bg-gradient-to-r from-chapingo-blue-700 to-chapingo-blue-500" />
+              <div className="flex flex-1 flex-col p-5">
+                <div className="flex items-start justify-between gap-2">
+                  <h2 className="text-base font-semibold leading-snug text-chapingo-blue-900 dark:text-white">
+                    {curso.nombre}
+                  </h2>
+                  <EstadoBadge estado={curso.estado} />
+                </div>
+
+                <dl className="mt-4 grid grid-cols-2 gap-y-1.5 text-sm text-chapingo-silver-600 dark:text-chapingo-silver-400">
+                  <dt>Unidades</dt>
+                  <dd className="text-right font-medium text-foreground">
+                    {curso._count.unidades}
+                  </dd>
+                  <dt>Programa</dt>
+                  <dd className="text-right font-medium text-foreground">
+                    {programas > 0 ? "Cargado" : "—"}
+                  </dd>
+                  <dt>Bibliografía</dt>
+                  <dd className="text-right font-medium text-foreground">
+                    {bibliografia} archivo{bibliografia === 1 ? "" : "s"}
+                  </dd>
+                  <dt>Recursos generados</dt>
+                  <dd className="text-right font-medium text-foreground">
+                    {curso._count.recursos}
+                  </dd>
+                </dl>
+
+                <span className="mt-4 text-sm font-medium text-chapingo-blue-700 group-hover:underline dark:text-chapingo-blue-600">
+                  Ver curso →
+                </span>
               </div>
-
-              <dl className="mt-4 grid grid-cols-2 gap-y-1.5 text-sm text-zinc-600 dark:text-zinc-400">
-                <dt>Unidades</dt>
-                <dd className="text-right font-medium text-zinc-900 dark:text-zinc-100">
-                  {curso._count.unidades}
-                </dd>
-                <dt>Programa</dt>
-                <dd className="text-right font-medium text-zinc-900 dark:text-zinc-100">
-                  {programas > 0 ? "Cargado" : "—"}
-                </dd>
-                <dt>Bibliografía</dt>
-                <dd className="text-right font-medium text-zinc-900 dark:text-zinc-100">
-                  {bibliografia} archivo{bibliografia === 1 ? "" : "s"}
-                </dd>
-                <dt>Recursos generados</dt>
-                <dd className="text-right font-medium text-zinc-900 dark:text-zinc-100">
-                  {curso._count.recursos}
-                </dd>
-              </dl>
-
-              <span className="mt-4 text-sm font-medium text-zinc-900 group-hover:underline dark:text-zinc-100">
-                Ver curso →
-              </span>
             </Link>
           );
         })}

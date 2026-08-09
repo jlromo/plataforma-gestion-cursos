@@ -39,17 +39,19 @@ export default async function UnidadPage({
         ]}
       />
 
-      <h1 className="mt-2 text-2xl font-semibold tracking-tight">{unidad.titulo}</h1>
+      <h1 className="mt-2 text-2xl font-semibold tracking-tight text-chapingo-blue-900 dark:text-white">
+        {unidad.titulo}
+      </h1>
       {unidad.objetivo && (
-        <p className="mt-2 max-w-3xl text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mt-2 max-w-3xl text-sm text-chapingo-silver-600 dark:text-chapingo-silver-400">
           {unidad.objetivo}
         </p>
       )}
 
       <section className="mt-8">
-        <h2 className="text-lg font-semibold">Sesiones</h2>
+        <h2 className="text-lg font-semibold text-chapingo-blue-900 dark:text-white">Sesiones</h2>
         {unidad.sesiones.length === 0 ? (
-          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="mt-1 text-sm text-chapingo-silver-600 dark:text-chapingo-silver-400">
             Esta unidad no tiene sesiones definidas.
           </p>
         ) : (
@@ -58,19 +60,19 @@ export default async function UnidadPage({
               <li key={sesion.id}>
                 <Link
                   href={`/cursos/${slug}/unidades/${unidad.id}/sesiones/${sesion.id}`}
-                  className="group flex items-start justify-between gap-4 rounded-md border border-black/[.08] bg-white px-4 py-3 text-sm transition hover:border-black/[.16] hover:shadow-sm dark:border-white/[.145] dark:bg-zinc-950 dark:hover:border-white/[.25]"
+                  className="group flex items-start justify-between gap-4 rounded-md border border-chapingo-silver-200 bg-white px-4 py-3 text-sm transition hover:border-chapingo-blue-500 hover:shadow-sm dark:border-chapingo-silver-200 dark:bg-chapingo-silver-50 dark:hover:border-chapingo-blue-500"
                 >
                   <div>
-                    <p className="font-medium">{sesion.titulo}</p>
+                    <p className="font-medium text-foreground">{sesion.titulo}</p>
                     {sesion.objetivo && (
-                      <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+                      <p className="mt-1 text-xs text-chapingo-silver-600 dark:text-chapingo-silver-400">
                         {sesion.objetivo}
                       </p>
                     )}
                   </div>
-                  <span className="flex shrink-0 items-center gap-3 text-xs text-zinc-500 dark:text-zinc-400">
+                  <span className="flex shrink-0 items-center gap-3 text-xs text-chapingo-silver-600 dark:text-chapingo-silver-400">
                     {sesion._count.recursos} recursos
-                    <span className="text-zinc-900 group-hover:underline dark:text-zinc-100">
+                    <span className="text-chapingo-blue-700 group-hover:underline dark:text-chapingo-blue-500">
                       Ver →
                     </span>
                   </span>
@@ -82,14 +84,14 @@ export default async function UnidadPage({
       </section>
 
       <section className="mt-8">
-        <h2 className="text-lg font-semibold">
+        <h2 className="text-lg font-semibold text-chapingo-blue-900 dark:text-white">
           Bibliografía de la unidad{" "}
-          <span className="text-sm font-normal text-zinc-500 dark:text-zinc-400">
+          <span className="text-sm font-normal text-chapingo-silver-600 dark:text-chapingo-silver-400">
             ({unidad.referencias.length})
           </span>
         </h2>
         {unidad.referencias.length === 0 ? (
-          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="mt-1 text-sm text-chapingo-silver-600 dark:text-chapingo-silver-400">
             Sin bibliografía vinculada a esta unidad todavía.
           </p>
         ) : (
@@ -97,7 +99,7 @@ export default async function UnidadPage({
             {unidad.referencias.map((r) => (
               <li
                 key={r.id}
-                className="rounded-md border border-black/[.08] bg-white px-3 py-2 text-sm dark:border-white/[.145] dark:bg-zinc-950"
+                className="rounded-md border border-chapingo-silver-200 bg-white px-3 py-2 text-sm dark:border-chapingo-silver-200 dark:bg-chapingo-silver-50"
               >
                 {r.titulo}
               </li>
@@ -107,15 +109,15 @@ export default async function UnidadPage({
       </section>
 
       <section className="mt-8 mb-10">
-        <h2 className="text-lg font-semibold">Recursos generados de la unidad</h2>
-        <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+        <h2 className="text-lg font-semibold text-chapingo-blue-900 dark:text-white">Recursos generados de la unidad</h2>
+        <p className="mt-1 text-xs text-chapingo-silver-600 dark:text-chapingo-silver-400">
           Recursos que cubren la unidad completa (por ejemplo, una guía de lectura o un
           examen de toda la unidad). Para recursos de una sola clase, genérelos desde la
           sesión correspondiente.
         </p>
         <GenerarRecursoForm cursoId={unidad.cursoId} unidadId={unidad.id} />
         {unidad.recursos.length === 0 ? (
-          <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="mt-3 text-sm text-chapingo-silver-600 dark:text-chapingo-silver-400">
             Aún no se ha generado ningún recurso a nivel de unidad.
           </p>
         ) : (
@@ -124,10 +126,10 @@ export default async function UnidadPage({
               <li key={r.id}>
                 <a
                   href={`/api/recursos/${r.id}`}
-                  className="flex items-center justify-between rounded-md border border-black/[.08] bg-white px-3 py-2 text-sm hover:border-black/[.16] dark:border-white/[.145] dark:bg-zinc-950 dark:hover:border-white/[.25]"
+                  className="flex items-center justify-between rounded-md border border-chapingo-silver-200 bg-white px-3 py-2 text-sm hover:border-chapingo-blue-500 dark:border-chapingo-silver-200 dark:bg-chapingo-silver-50 dark:hover:border-chapingo-blue-500"
                 >
                   <span>{r.titulo}</span>
-                  <span className="text-zinc-500 dark:text-zinc-400">
+                  <span className="text-chapingo-silver-600 dark:text-chapingo-silver-400">
                     {ETIQUETA_TIPO[r.tipo]}
                   </span>
                 </a>

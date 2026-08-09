@@ -46,12 +46,12 @@ export function GenerarRecursoForm({
   }
 
   return (
-    <div className="mt-2 flex flex-wrap items-center gap-2 rounded-md border border-dashed border-black/[.15] p-3 dark:border-white/[.2]">
+    <div className="mt-2 flex flex-wrap items-center gap-2 rounded-md border border-dashed border-chapingo-blue-500/40 bg-chapingo-blue-50 p-3 dark:border-chapingo-blue-500/40 dark:bg-chapingo-blue-50">
       <select
         value={tipo}
         onChange={(e) => setTipo(e.target.value as TipoRecurso)}
         disabled={cargando}
-        className="rounded-md border border-black/[.15] bg-white px-2 py-1.5 text-sm dark:border-white/[.2] dark:bg-zinc-900"
+        className="rounded-md border border-chapingo-silver-300 bg-white px-2 py-1.5 text-sm text-foreground dark:border-chapingo-silver-300 dark:bg-chapingo-silver-50"
       >
         {TIPOS_RECURSO.map((t) => (
           <option key={t} value={t}>
@@ -62,7 +62,7 @@ export function GenerarRecursoForm({
       <button
         onClick={generar}
         disabled={cargando}
-        className="rounded-md bg-zinc-900 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-zinc-700 disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
+        className="rounded-md bg-chapingo-blue-700 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-chapingo-blue-800 disabled:opacity-50"
       >
         {cargando ? "Generando…" : "Generar recurso"}
       </button>
@@ -70,12 +70,12 @@ export function GenerarRecursoForm({
       {ultimoRecurso && !error && (
         <a
           href={`/api/recursos/${ultimoRecurso.id}`}
-          className="text-sm font-medium text-emerald-700 hover:underline dark:text-emerald-400"
+          className="text-sm font-medium text-emerald-700 hover:underline dark:text-emerald-600"
         >
           Descargar "{ETIQUETA_TIPO[ultimoRecurso.tipo]}" generado →
         </a>
       )}
-      <p className="w-full text-xs text-zinc-500 dark:text-zinc-400">
+      <p className="w-full text-xs text-chapingo-silver-600 dark:text-chapingo-silver-600">
         Recuerde: el selector conserva el tipo elegido. Para generar otro tipo, cámbielo
         antes de dar clic en "Generar recurso".
       </p>

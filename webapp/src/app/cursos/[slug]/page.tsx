@@ -47,7 +47,9 @@ export default async function CursoPage({
       <Breadcrumbs items={[{ label: "Cursos", href: "/" }, { label: curso.nombre }]} />
 
       <div className="mt-2 flex items-start justify-between gap-3">
-        <h1 className="text-2xl font-semibold tracking-tight">{curso.nombre}</h1>
+        <h1 className="text-2xl font-semibold tracking-tight text-chapingo-blue-900 dark:text-white">
+          {curso.nombre}
+        </h1>
         <EstadoBadge estado={curso.estado} />
       </div>
 
@@ -63,9 +65,9 @@ export default async function CursoPage({
       )}
 
       <section className="mt-8">
-        <h2 className="text-lg font-semibold">Programa</h2>
+        <h2 className="text-lg font-semibold text-chapingo-blue-900 dark:text-white">Programa</h2>
         {programas.length === 0 ? (
-          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="mt-1 text-sm text-chapingo-silver-600 dark:text-chapingo-silver-400">
             Sin programa cargado.
           </p>
         ) : (
@@ -73,10 +75,10 @@ export default async function CursoPage({
             {programas.map((m) => (
               <li
                 key={m.id}
-                className="flex items-center justify-between rounded-md border border-black/[.08] bg-white px-3 py-2 text-sm dark:border-white/[.145] dark:bg-zinc-950"
+                className="flex items-center justify-between rounded-md border border-chapingo-silver-200 bg-white px-3 py-2 text-sm dark:border-chapingo-silver-200 dark:bg-chapingo-silver-50"
               >
                 <span>{m.nombre}</span>
-                <span className="text-zinc-500 dark:text-zinc-400">
+                <span className="text-chapingo-silver-600 dark:text-chapingo-silver-400">
                   {formatBytes(m.tamanioBytes)}
                 </span>
               </li>
@@ -86,32 +88,32 @@ export default async function CursoPage({
       </section>
 
       <section className="mt-8">
-        <h2 className="text-lg font-semibold">
+        <h2 className="text-lg font-semibold text-chapingo-blue-900 dark:text-white">
           Bibliografía general{" "}
-          <span className="text-sm font-normal text-zinc-500 dark:text-zinc-400">
+          <span className="text-sm font-normal text-chapingo-silver-600 dark:text-chapingo-silver-400">
             ({bibliografia.length})
           </span>
         </h2>
-        <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+        <p className="mt-1 text-xs text-chapingo-silver-600 dark:text-chapingo-silver-400">
           Archivos no vinculados a una unidad específica.
         </p>
         {bibliografia.length === 0 ? (
-          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="mt-1 text-sm text-chapingo-silver-600 dark:text-chapingo-silver-400">
             Sin bibliografía cargada.
           </p>
         ) : (
           <details className="mt-2">
-            <summary className="cursor-pointer text-sm font-medium text-zinc-600 dark:text-zinc-400">
+            <summary className="cursor-pointer text-sm font-medium text-chapingo-blue-700 dark:text-chapingo-blue-500">
               Ver archivos
             </summary>
             <ul className="mt-1 max-h-80 space-y-1 overflow-y-auto pr-1">
               {bibliografia.map((m) => (
                 <li
                   key={m.id}
-                  className="flex items-center justify-between rounded-md border border-black/[.08] bg-white px-3 py-2 text-sm dark:border-white/[.145] dark:bg-zinc-950"
+                  className="flex items-center justify-between rounded-md border border-chapingo-silver-200 bg-white px-3 py-2 text-sm dark:border-chapingo-silver-200 dark:bg-chapingo-silver-50"
                 >
                   <span className="truncate pr-4">{m.nombre}</span>
-                  <span className="shrink-0 text-zinc-500 dark:text-zinc-400">
+                  <span className="shrink-0 text-chapingo-silver-600 dark:text-chapingo-silver-400">
                     {formatBytes(m.tamanioBytes)}
                   </span>
                 </li>
@@ -122,9 +124,9 @@ export default async function CursoPage({
       </section>
 
       <section className="mt-8">
-        <h2 className="text-lg font-semibold">Unidades temáticas</h2>
+        <h2 className="text-lg font-semibold text-chapingo-blue-900 dark:text-white">Unidades temáticas</h2>
         {curso.unidades.length === 0 ? (
-          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="mt-1 text-sm text-chapingo-silver-600 dark:text-chapingo-silver-400">
             Aún no se han definido las unidades a partir del programa. (Próximo
             paso: estructurar el temario.)
           </p>
@@ -134,12 +136,12 @@ export default async function CursoPage({
               <li key={unidad.id}>
                 <Link
                   href={`/cursos/${curso.slug}/unidades/${unidad.id}`}
-                  className="group flex items-center justify-between rounded-md border border-black/[.08] bg-white px-4 py-3 text-sm transition hover:border-black/[.16] hover:shadow-sm dark:border-white/[.145] dark:bg-zinc-950 dark:hover:border-white/[.25]"
+                  className="group flex items-center justify-between rounded-md border border-chapingo-silver-200 bg-white px-4 py-3 text-sm transition hover:border-chapingo-blue-500 hover:shadow-sm dark:border-chapingo-silver-200 dark:bg-chapingo-silver-50 dark:hover:border-chapingo-blue-500"
                 >
-                  <span className="font-medium">{unidad.titulo}</span>
-                  <span className="flex items-center gap-3 text-xs text-zinc-500 dark:text-zinc-400">
+                  <span className="font-medium text-foreground">{unidad.titulo}</span>
+                  <span className="flex items-center gap-3 text-xs text-chapingo-silver-600 dark:text-chapingo-silver-400">
                     {unidad._count.sesiones} sesiones · {unidad._count.referencias} referencias
-                    <span className="text-zinc-900 group-hover:underline dark:text-zinc-100">
+                    <span className="text-chapingo-blue-700 group-hover:underline dark:text-chapingo-blue-500">
                       Ver →
                     </span>
                   </span>
@@ -151,12 +153,12 @@ export default async function CursoPage({
       </section>
 
       <section className="mt-8 mb-10">
-        <h2 className="text-lg font-semibold">Recursos generados del curso</h2>
-        <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+        <h2 className="text-lg font-semibold text-chapingo-blue-900 dark:text-white">Recursos generados del curso</h2>
+        <p className="mt-1 text-xs text-chapingo-silver-600 dark:text-chapingo-silver-400">
           No ligados a una unidad o sesión específica.
         </p>
         {curso.recursos.length === 0 ? (
-          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="mt-1 text-sm text-chapingo-silver-600 dark:text-chapingo-silver-400">
             Aún no se ha generado ningún recurso de este tipo para este curso.
           </p>
         ) : (
@@ -164,10 +166,10 @@ export default async function CursoPage({
             {curso.recursos.map((r) => (
               <li
                 key={r.id}
-                className="flex items-center justify-between rounded-md border border-black/[.08] bg-white px-3 py-2 text-sm dark:border-white/[.145] dark:bg-zinc-950"
+                className="flex items-center justify-between rounded-md border border-chapingo-silver-200 bg-white px-3 py-2 text-sm dark:border-chapingo-silver-200 dark:bg-chapingo-silver-50"
               >
                 <span>{r.titulo}</span>
-                <span className="text-zinc-500 dark:text-zinc-400">{r.tipo}</span>
+                <span className="text-chapingo-silver-600 dark:text-chapingo-silver-400">{r.tipo}</span>
               </li>
             ))}
           </ul>

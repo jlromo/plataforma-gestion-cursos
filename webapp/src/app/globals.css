@@ -1,8 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f4f6f9;
+  --foreground: #16202c;
+
+  /* Azul institucional UACh */
+  --color-chapingo-blue-950: #061a36;
+  --color-chapingo-blue-900: #0a2748;
+  --color-chapingo-blue-800: #0f3a68;
+  --color-chapingo-blue-700: #154d88;
+  --color-chapingo-blue-600: #1e63ab;
+  --color-chapingo-blue-500: #2f7bc9;
+  --color-chapingo-blue-100: #dde9f7;
+  --color-chapingo-blue-50: #eff4fb;
+
+  /* Plata UACh */
+  --color-chapingo-silver-50: #f7f8f9;
+  --color-chapingo-silver-100: #eceef1;
+  --color-chapingo-silver-200: #dadde3;
+  --color-chapingo-silver-300: #c1c6cf;
+  --color-chapingo-silver-400: #9aa1ac;
+  --color-chapingo-silver-600: #616873;
 }
 
 @theme inline {
@@ -10,17 +28,40 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-chapingo-blue-950: var(--color-chapingo-blue-950);
+  --color-chapingo-blue-900: var(--color-chapingo-blue-900);
+  --color-chapingo-blue-800: var(--color-chapingo-blue-800);
+  --color-chapingo-blue-700: var(--color-chapingo-blue-700);
+  --color-chapingo-blue-600: var(--color-chapingo-blue-600);
+  --color-chapingo-blue-500: var(--color-chapingo-blue-500);
+  --color-chapingo-blue-100: var(--color-chapingo-blue-100);
+  --color-chapingo-blue-50: var(--color-chapingo-blue-50);
+
+  --color-chapingo-silver-50: var(--color-chapingo-silver-50);
+  --color-chapingo-silver-100: var(--color-chapingo-silver-100);
+  --color-chapingo-silver-200: var(--color-chapingo-silver-200);
+  --color-chapingo-silver-300: var(--color-chapingo-silver-300);
+  --color-chapingo-silver-400: var(--color-chapingo-silver-400);
+  --color-chapingo-silver-600: var(--color-chapingo-silver-600);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0a1420;
+    --foreground: #e7ecf2;
+
+    --color-chapingo-blue-100: #12335c;
+    --color-chapingo-blue-50: #0e2340;
+    --color-chapingo-silver-50: #182430;
+    --color-chapingo-silver-100: #202e3c;
+    --color-chapingo-silver-200: #2b3a49;
+    --color-chapingo-silver-300: #445264;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
