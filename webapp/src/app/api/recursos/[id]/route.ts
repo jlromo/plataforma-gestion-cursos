@@ -1,4 +1,3 @@
-import fs from "node:fs";
 import path from "node:path";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
@@ -15,19 +14,17 @@ export async function GET(
   const { id } = await params;
 
   const recurso = await prisma.recursoGenerado.findUnique({ where: { id } });
-  if (!recurso || !fs.existsSync(recurso.archivo)) {
+  if (!recurso) {
     return NextResponse.json({ error: "Recurso no encontrado." }, { status: 404 });
   }
 
-  const extension = path.extname(recurso.archivo).toLowerCase();
+  const extension = path.extname(recurso.nombreArchivo).toLowerCase();
   const contentType = CONTENT_TYPE_POR_EXTENSION[extension] ?? "application/octet-stream";
-  const buffer = fs.readFileSync(recurso.archivo);
-  const nombreDescarga = path.basename(recurso.archivo);
 
-  return new NextResponse(new Uint8Array(buffer), {
+  return new NextResponse(new Uint8Array(recurso.contenido), {
     headers: {
       "Content-Type": contentType,
-      "Content-Disposition": `attachment; filename="${encodeURIComponent(nombreDescarga)}"`,
+      "Content-Disposition": `attachment; filename="${encodeURIComponent(recurso.nombreArchivo)}"`,
     },
   });
 }

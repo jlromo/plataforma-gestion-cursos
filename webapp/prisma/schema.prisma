@@ -9,7 +9,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 
 enum EstadoContenido {
@@ -101,7 +101,8 @@ model RecursoGenerado {
   unidadId   String?
   sesion     Sesion?     @relation(fields: [sesionId], references: [id], onDelete: SetNull)
   sesionId   String?
-  titulo     String
-  archivo    String
-  creadoEn   DateTime    @default(now())
+  titulo       String
+  nombreArchivo String
+  contenido    Bytes
+  creadoEn     DateTime  @default(now())
 }

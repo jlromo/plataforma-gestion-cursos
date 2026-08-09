@@ -1,5 +1,3 @@
-import fs from "node:fs";
-import path from "node:path";
 import { prisma } from "@/lib/prisma";
 import { generarContenido } from "./cliente";
 import type { ContenidoPorTipo, ContextoGeneracion, TipoRecurso } from "./tipos";
@@ -89,15 +87,11 @@ export async function generarYGuardarRecurso(params: ParametrosGeneracion) {
     bibliografia: referencias.map((r) => r.titulo),
   };
 
-  const contenido = await generarContenido(tipo, contexto);
-  const buffer = await construirArchivo(tipo, contenido);
+  const contenidoGenerado = await generarContenido(tipo, contexto);
+  const buffer = await construirArchivo(tipo, contenidoGenerado);
 
   const extension = EXTENSION_POR_TIPO[tipo];
-  const nombreArchivo = `${slugificar(contenido.titulo)}-${Date.now()}.${extension}`;
-  const carpetaDestino = path.join(process.cwd(), "generated", curso.slug);
-  fs.mkdirSync(carpetaDestino, { recursive: true });
-  const rutaAbsoluta = path.join(carpetaDestino, nombreArchivo);
-  fs.writeFileSync(rutaAbsoluta, buffer);
+  const nombreArchivo = `${slugificar(contenidoGenerado.titulo)}-${Date.now()}.${extension}`;
 
   return prisma.recursoGenerado.create({
     data: {
@@ -105,8 +99,9 @@ export async function generarYGuardarRecurso(params: ParametrosGeneracion) {
       cursoId,
       unidadId: unidad?.id ?? null,
       sesionId: sesion?.id ?? null,
-      titulo: contenido.titulo,
-      archivo: rutaAbsoluta,
+      titulo: contenidoGenerado.titulo,
+      nombreArchivo,
+      contenido: Uint8Array.from(buffer),
     },
   });
 }

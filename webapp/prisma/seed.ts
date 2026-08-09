@@ -1,11 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
+import "dotenv/config";
+import { Pool } from "pg";
+import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient, TipoMaterial, EstadoContenido } from "../src/generated/prisma/client";
 
-const adapter = new PrismaBetterSqlite3({
-  url: path.resolve(__dirname, "..", "dev.db"),
-});
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 // Raíz del proyecto de materiales (un nivel arriba de webapp/), donde el
